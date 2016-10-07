@@ -18,13 +18,15 @@ public class OddOrEvenGenerator {
    * @return the entire JavaScript script as a String.
    */
   public static String generate(int min, int max, int num) {
+
+    // -1, 100, -1 = problem
     String result = "";
     result += "function isEven(num) {\n";
     result += "  if(";
 
     // Check if min/max are even by "rounding" towards 0.
-    min = (min % 2 == 1) ? (min < 0) ? min + 1 : min - 1 : min;
-    max = (max % 2 == 1) ? (max > 0) ? max - 1 : max + 1 : max;
+    min = (Math.abs(min % 2) == 1) ? (min < 0) ? min + 1 : min - 1 : min;
+    max = (Math.abs(max % 2) == 1) ? (max > 0) ? max - 1 : max + 1 : max;
 
     // The massive chain of ORs.
     result += "num == " + min;

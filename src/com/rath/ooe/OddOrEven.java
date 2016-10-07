@@ -58,14 +58,21 @@ public class OddOrEven {
     // Evaluate the script and get the result
     boolean res = false;
     try {
+
+      // ScriptEngine.put(<VAR NAME>, <VALUE>);
+      // ScriptEngine.eval(<SCRIPT>);
+      // ScriptEngine.get(<VAR NAME>) -> Object
       eng.put("ienum", n);
       eng.eval(this.script);
       res = (boolean) eng.get("ieres");
     }
-    catch (ScriptException e) {
+    catch (ScriptException se) {
       System.err.println("Error with script:");
       System.err.println(this.script);
-      e.printStackTrace();
+      se.printStackTrace();
+    }
+    catch (StackOverflowError soe) {
+      System.err.println(soe.getMessage());
     }
 
     return res;
